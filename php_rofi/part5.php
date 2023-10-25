@@ -4,7 +4,7 @@
     <title>Pembelian Bakso dan Es Teh</title>
 </head>
 <body>
-    <h1>Selamat datang di Warung Makan</h1>
+    <center><h1>Selamat datang di Warung Makan</h1>
 
     <?php
     $bakso = 10000;
@@ -46,5 +46,6 @@
         echo "<p>$pesan</p>";
     }
     ?>
+    </center>
 </body>
 </html>

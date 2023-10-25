@@ -1,28 +1,50 @@
-<?php
-$bakso = 10000;
-$esteh = 5000;
-$uangawal = 30000;
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pembelian Bakso dan Es Teh</title>
+</head>
+<body>
+    <h1>Selamat datang di Warung Makan</h1>
 
-echo "Saya ingin Membeli Bakso Seharga Rp. $bakso , Sedangkan saya memiliki Uang sebanyak Rp. $uangawal<br>";
-if ($uangawal >= $bakso) {
-    $uangawal -= $bakso;
-echo "Saya Membeli Bakso seharga Rp. $bakso , Sehingga uang saya tersisa Rp. $uangawal <br>";
-}
-else 
-echo "Uang anda tidak cukup untuk membeli Bakso <br>";
+    <?php
+    $bakso = 10000;
+    $esteh = 5000;
+    $uangawal = 30000;
+    $pesan = '';
 
+    if (isset($_POST['beli'])) {
+        $jumlah_uang = $_POST['jumlah_uang'];
 
-echo "Saya ingin Membeli Es Teh Seharga Rp. $esteh <br>";
-if ($uangawal >= 20000) {
-$uangawal -= $esteh;
-echo "Saya Membeli 2 Es Teh, Uang saya tersisa sebanyak Rp. $uangawal";
-}
-elseif ($uangawal >= $esteh) {
-$uangawal -= $esteh;
-echo "Uang saya tersisa sebanyak Rp. $uangawal Dikarenakan membeli Es Teh juga";
-}
-else
-echo "Uang saya tidak cukup untuk membeli es teh <br>";
+        echo "Anda memiliki Uang sebanyak Rp. $jumlah_uang<br>";
 
+        if ($jumlah_uang >= $bakso) {
+            $jumlah_uang -= $bakso;
+            $pesan = "Anda membeli Bakso seharga Rp. $bakso, sisa uang: Rp. $jumlah_uang";
+        } elseif ($jumlah_uang < $bakso) {
+            $pesan = "Uang anda tidak cukup untuk membeli Bakso";
+        }
 
-?>
+        echo "<br>";
+
+        if ($jumlah_uang >= $esteh) {
+            $jumlah_uang -= $esteh;
+            $pesan .= "<br>Anda membeli Es Teh seharga Rp. $esteh, sisa uang: Rp. $jumlah_uang";
+        } elseif ($jumlah_uang >= $esteh) {
+            $pesan .= "<br>Uang anda tidak cukup untuk membeli Es Teh";
+        }
+    }
+    ?>
+
+    <form method="post">
+        <p>Masukkan jumlah uang yang Anda miliki:</p>
+        <input type="text" name="jumlah_uang" required>
+        <input type="submit" name="beli" value="Beli">
+    </form>
+
+    <?php
+    if (!empty($pesan)) {
+        echo "<p>$pesan</p>";
+    }
+    ?>
+</body>
+</html>
